@@ -1,0 +1,244 @@
+Absolutely! Here’s a **single HTML file** with the CSS included, so you can paste it directly into VS Code and run it. It includes adding tasks, checkboxes, and delete buttons, with a clean rounded design ✨
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List | My Perfect Day</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f0f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #5b4b8a;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        #taskInput {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        #taskInput:focus {
+            border-color: #8b78bd;
+        }
+
+        button {
+            border: none;
+            border-radius: 30px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .add-btn {
+            background: #6d5aa8;
+            color: white;
+        }
+
+        .add-btn:hover {
+            background: #55458a;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f7f5fb;
+            padding: 14px 16px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+        }
+
+        li span {
+            flex: 1;
+            color: #333;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            width: 19px;
+            height: 19px;
+            cursor: pointer;
+        }
+
+        li.completed span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .delete-btn {
+            background: #eee;
+            color: #d9534f;
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        .delete-btn:hover {
+            background: #f5dada;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 25px;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .add-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>✨ My To-Do List: My Perfect Day</h1>
+        <p class="subtitle">Plan your day, complete your goals, and make it count!</p>
+
+        <div class="input-area">
+            <input 
+                type="text" 
+                id="taskInput" 
+                placeholder="Enter a new task..."
+            >
+            <button class="add-btn" onclick="addTask()">Add Task</button>
+        </div>
+
+        <ul id="taskList">
+
+            <li>
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>Complete homework</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            </li>
+
+            <li>
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>Read a book</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            </li>
+
+            <li>
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>Exercise</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            </li>
+
+            <li>
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>Clean my room</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            </li>
+
+            <li>
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>Practice English</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                <input type="checkbox" onchange="completeTask(this)">
+                <span>${taskText}</span>
+                <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+            `;
+
+            document.getElementById("taskList").appendChild(li);
+
+            input.value = "";
+            input.focus();
+        }
+
+        function completeTask(checkbox) {
+            const task = checkbox.parentElement;
+
+            if (checkbox.checked) {
+                task.classList.add("completed");
+            } else {
+                task.classList.remove("completed");
+            }
+        }
+
+        function deleteTask(button) {
+            button.parentElement.remove();
+        }
+
+        document.getElementById("taskInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addTask();
+            }
+        });
+    </script>
+
+</body>
+</html>
+```
